@@ -1045,20 +1045,32 @@
 
   function submitForm() {
     const data = collectFormData();
-    console.log('Survey response:', data);
 
-    // ── Replace the action below with your Formspree endpoint ──
-    // e.g. https://formspree.io/f/YOUR_FORM_ID
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbdwbpql';
+    // ── Replace with your Formspree endpoint ──
+    // e.g. https://formspree.io/f/abcd1234
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
-    const body = new FormData();
-    Object.entries(data).forEach(([k, v]) => body.append(k, v));
+    const submitBtn = document.querySelector('#step-4 .btn-next');
+    submitBtn.textContent = 'Submitting…';
+    submitBtn.disabled = true;
 
-    fetch(FORMSPREE_ENDPOINT, { method: 'POST', body, headers: { 'Accept': 'application/json' } })
-      .then(() => showThankyou())
-      .catch(() => showThankyou()); // still show thanks even if endpoint not set up
-
-    showThankyou();
+    fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(res => {
+        if (res.ok) {
+          showThankyou();
+        } else {
+          return res.json().then(err => { throw new Error(err.error || 'Submission failed'); });
+        }
+      })
+      .catch(err => {
+        submitBtn.textContent = 'Submit →';
+        submitBtn.disabled = false;
+        alert('Something went wrong: ' + err.message + '\n\nMake sure your Formspree endpoint is correct.');
+      });
   }
 
   function showThankyou() {
