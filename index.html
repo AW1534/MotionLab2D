@@ -15,7 +15,7 @@
     --border: rgba(255,255,255,0.08);
     --border-hover: rgba(255,255,255,0.18);
     --text: #f0efe8;
-    --muted: #7a7976;
+    --muted: #7a7975;
     --accent: #c8f060;
     --accent-dim: rgba(200,240,96,0.12);
     --accent-dim2: rgba(200,240,96,0.06);
@@ -31,7 +31,6 @@
     padding: 0;
   }
 
-  /* Progress bar */
   #progress-bar {
     position: fixed;
     top: 0; left: 0;
@@ -41,7 +40,6 @@
     z-index: 100;
   }
 
-  /* Header */
   header {
     border-bottom: 1px solid var(--border);
     padding: 18px 40px;
@@ -68,14 +66,12 @@
     font-family: 'DM Mono', monospace;
   }
 
-  /* Main layout */
   main {
     max-width: 680px;
     margin: 0 auto;
     padding: 60px 24px 120px;
   }
 
-  /* Steps */
   .step { display: none; }
   .step.active { display: block; animation: fadeUp 0.35s ease; }
 
@@ -84,7 +80,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Step header */
   .step-tag {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -108,7 +103,6 @@
     margin-bottom: 40px;
   }
 
-  /* Role selector cards */
   .role-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -165,7 +159,6 @@
   .role-check svg { display: none; }
   .role-card.selected .role-check svg { display: block; }
 
-  /* Question blocks */
   .q-block {
     margin-bottom: 32px;
     padding-bottom: 32px;
@@ -199,7 +192,6 @@
   .badge-qual  { background: rgba(133,183,235,0.15); color: #85b7eb; }
   .badge-quant { background: rgba(200,240,96,0.12);  color: var(--accent); }
 
-  /* Likert scale */
   .likert {
     display: flex;
     gap: 6px;
@@ -243,7 +235,6 @@
     color: var(--muted);
   }
 
-  /* Frequency options */
   .freq-options {
     display: flex;
     flex-wrap: wrap;
@@ -271,7 +262,6 @@
 
   .freq-btn:hover { border-color: var(--border-hover); color: var(--text); }
 
-  /* Ranking */
   .rank-list { list-style: none; }
 
   .rank-item {
@@ -307,7 +297,6 @@
     line-height: 1;
   }
 
-  /* Textarea */
   textarea {
     width: 100%;
     background: var(--surface);
@@ -326,7 +315,6 @@
   textarea:focus { outline: none; border-color: var(--border-hover); }
   textarea::placeholder { color: var(--muted); }
 
-  /* Nav buttons */
   .nav-row {
     display: flex;
     gap: 12px;
@@ -364,57 +352,6 @@
 
   .btn-back:hover { color: var(--text); border-color: var(--border-hover); }
 
-  /* Section divider inside step */
-  .section-divider {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin: 36px 0 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .section-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* Thankyou screen */
-  #thankyou {
-    display: none;
-    text-align: center;
-    padding: 80px 0;
-    animation: fadeUp 0.4s ease;
-  }
-
-  .ty-icon {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: var(--accent-dim);
-    border: 1px solid var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 24px;
-    font-size: 28px;
-  }
-
-  /* Error */
-  .field-error {
-    font-size: 12px;
-    color: var(--danger);
-    margin-top: 6px;
-    display: none;
-  }
-
-  .has-error textarea,
-  .has-error .likert-btn,
-  .has-error .freq-btn { border-color: rgba(255,107,107,0.4) !important; }
-
-  /* Intro page */
   .intro-hero {
     padding: 48px 0 36px;
     border-bottom: 1px solid var(--border);
@@ -546,6 +483,34 @@
     border-left: 2px solid var(--accent);
   }
 
+  #thankyou {
+    display: none;
+    text-align: center;
+    padding: 80px 0;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .ty-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 28px;
+  }
+
+  .field-error {
+    font-size: 12px;
+    color: var(--danger);
+    margin-top: 6px;
+    display: none;
+  }
+
+  .has-error textarea,
+  .has-error .likert-btn,
+  .has-error .freq-btn { border-color: rgba(255,107,107,0.4) !important; }
+
   @media (max-width: 500px) {
     header { padding: 14px 16px; }
     main { padding: 40px 16px 100px; }
@@ -598,12 +563,12 @@
       <ul class="problem-list">
         <li><span class="problem-icon">→</span>Static diagrams and equations don't show how physical systems evolve over time, making concepts like forces, vectors and momentum hard to grasp.</li>
         <li><span class="problem-icon">→</span>Existing simulation tools are either too complex, commercial, or not designed with A-Level content in mind.</li>
-        <li><span class="problem-icon">→</span>There is no lightweight, accessible tool that lets students build scenarios and experiment with parameters like mass, velocity and applied forces in real time.</li>
+        <li><span class="problem-icon">→</span>There is no lightweight, accessible tool that lets students build scenarios and experiment with parameters like mass, velocity and applied forces.</li>
       </ul>
     </div>
 
     <div class="solution-block">
-      <p>MotionLab 2D addresses this by providing a <strong>real-time 2D simulation</strong> with visual vector overlays, an intuitive scene editor, and a clean presentation mode — all in a single portable binary that runs on school computers without installation. Physics is handled by a custom engine implementing <strong>Velocity-Verlet integration</strong>, simplified collision detection and A-Level force models.</p>
+      <p>MotionLab 2D addresses this by providing a <strong>real-time 2D simulation</strong> with visual vector overlays, an intuitive scene editor, and a clean presentation mode — all in a single platform.</p>
     </div>
 
     <div class="problem-section">
@@ -618,7 +583,7 @@
       </ul>
     </div>
 
-    <p class="survey-note">You've been invited as a stakeholder in this project. Your responses will directly inform the design and feature priorities of MotionLab 2D and will be included as evidence in my NEA write-up. The survey takes around 5 minutes.</p>
+    <p class="survey-note">You've been invited as a stakeholder in this project. Your responses will directly inform the design and feature priorities of MotionLab 2D and will be included as evidence in the NEA analysis section.</p>
 
     <div class="nav-row">
       <button class="btn-next" onclick="showStep(1)">Start survey →</button>
@@ -782,12 +747,10 @@
 </main>
 
 <script>
-  // ── State ──
   let selectedRole = null;
   let formData = {};
   const TOTAL_STEPS = 4;
 
-  // ── Role selection ──
   function selectRole(card) {
     document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
@@ -795,7 +758,6 @@
     document.getElementById('role-error').style.display = 'none';
   }
 
-  // ── Role-specific question HTML ──
   const roleQuestions = {
     hussain: {
       tag: 'Mr Hussain · Teacher',
@@ -961,7 +923,6 @@
     }
   };
 
-  // ── Step navigation ──
   function nextStep(current) {
     if (current === 1) {
       if (!selectedRole) {
@@ -1002,74 +963,91 @@
     document.getElementById('s4-title').textContent = q.title;
     document.getElementById('s4-desc').textContent = q.desc;
     document.getElementById('s4-content').innerHTML = q.html;
-    setTimeout(initDrag, 50);
   }
 
-  // ── Drag-to-rank ──
   function initDrag() {
-    document.querySelectorAll('.rank-list').forEach(list => {
-      let dragged = null;
-      list.querySelectorAll('.rank-item').forEach(item => {
-        item.addEventListener('dragstart', () => { dragged = item; item.classList.add('dragging'); });
-        item.addEventListener('dragend', () => { item.classList.remove('dragging'); updateNums(list); });
-        item.addEventListener('dragover', e => { e.preventDefault(); item.classList.add('drag-over'); });
-        item.addEventListener('dragleave', () => item.classList.remove('drag-over'));
-        item.addEventListener('drop', e => {
-          e.preventDefault();
-          item.classList.remove('drag-over');
-          if (dragged && dragged !== item) list.insertBefore(dragged, item);
-          updateNums(list);
-        });
+    const ranks = document.querySelectorAll('.rank-list');
+    ranks.forEach(rankList => {
+      const items = rankList.querySelectorAll('.rank-item');
+      items.forEach(item => {
+        item.addEventListener('dragstart', dragStart);
+        item.addEventListener('dragover', dragOver);
+        item.addEventListener('drop', drop);
+        item.addEventListener('dragend', dragEnd);
+        item.addEventListener('dragleave', dragLeave);
       });
     });
   }
 
-  function updateNums(list) {
-    list.querySelectorAll('.rank-item').forEach((item, i) => {
-      item.querySelector('.rank-num').textContent = i + 1;
+  let draggedItem = null;
+
+  function dragStart(e) {
+    draggedItem = this;
+    this.classList.add('dragging');
+  }
+
+  function dragOver(e) {
+    e.preventDefault();
+    this.classList.add('drag-over');
+  }
+
+  function dragLeave() {
+    this.classList.remove('drag-over');
+  }
+
+  function drop(e) {
+    e.preventDefault();
+    if (draggedItem !== this) {
+      this.parentNode.insertBefore(draggedItem, this);
+      updateRankNumbers(this.parentNode);
+    }
+    this.classList.remove('drag-over');
+  }
+
+  function dragEnd() {
+    this.classList.remove('dragging');
+    document.querySelectorAll('.rank-item').forEach(item => item.classList.remove('drag-over'));
+  }
+
+  function updateRankNumbers(list) {
+    const items = list.querySelectorAll('.rank-item');
+    items.forEach((item, idx) => {
+      item.querySelector('.rank-num').textContent = idx + 1;
     });
   }
 
-  // ── Collect & submit ──
   function collectFormData() {
     const data = { role: selectedRole };
-    document.querySelectorAll('textarea').forEach(t => { if (t.name) data[t.name] = t.value; });
-    document.querySelectorAll('input[type=radio]:checked').forEach(r => { data[r.name] = r.value; });
-    document.querySelectorAll('.rank-list').forEach(list => {
-      const id = list.id;
-      const order = Array.from(list.querySelectorAll('.rank-item')).map(i => i.dataset.val);
-      data[id] = order.join(' > ');
+    document.querySelectorAll('input, textarea').forEach(field => {
+      if (field.type === 'radio') {
+        if (field.checked) data[field.name] = field.value;
+      } else if (field.type === 'textarea' || field.type === 'text') {
+        data[field.name] = field.value;
+      }
     });
+    const rankings = {};
+    document.querySelectorAll('.rank-list').forEach(list => {
+      const listId = list.id;
+      rankings[listId] = [];
+      list.querySelectorAll('.rank-item').forEach(item => {
+        rankings[listId].push(item.dataset.val);
+      });
+    });
+    data.rankings = rankings;
     return data;
   }
 
   function submitForm() {
     const data = collectFormData();
-    console.log('Survey response:', data);
-
-    // ── Replace the action below with your Formspree endpoint ──
-    // e.g. https://formspree.io/f/YOUR_FORM_ID
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbdwbpql';
-
-    const body = new FormData();
-    Object.entries(data).forEach(([k, v]) => body.append(k, v));
-
-    fetch(FORMSPREE_ENDPOINT, { method: 'POST', body, headers: { 'Accept': 'application/json' } })
-      .then(() => showThankyou())
-      .catch(() => showThankyou()); // still show thanks even if endpoint not set up
-
-    showThankyou();
-  }
-
-  function showThankyou() {
+    console.log('Survey data:', data);
     document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
     document.getElementById('thankyou').style.display = 'block';
     document.getElementById('progress-bar').style.width = '100%';
-    document.getElementById('step-counter').textContent = 'Complete';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   initDrag();
 </script>
+
 </body>
 </html>
