@@ -4,12 +4,13 @@
 
 #include <iostream>
 #include "test/main.h"
-#include <Window.h>
+#include "Window.h"
 
 using namespace MotionLab;
 
 int main() {
     Window window = Window(Maths::Vector2<int>{648, 480});
+
 
     return 0;
 }

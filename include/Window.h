@@ -27,7 +27,7 @@ namespace MotionLab {
         Color background = {0.98, 0.9,1, 255};
         Maths::Vector2<int> size;
         int beginLoop();
-        Window(Maths::Vector2<int> size = {648, 480});
+        Window(Maths::Vector2<int> windowSize = {648, 480});
 
         void cleanUp();
 

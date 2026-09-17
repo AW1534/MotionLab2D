@@ -15,6 +15,7 @@ namespace MotionLab {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
 
     window = glfwCreateWindow(size.x(), size.y(), "MotionLab2D", NULL, NULL);
 
@@ -37,9 +38,14 @@ namespace MotionLab {
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
     // io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
-    ImGui_ImplGlfw_InitForOpenGL(window, true); // 'window' is your GLFWwindow*, true = install callbacks
-    ImGui_ImplOpenGL3_Init("#version 330"); // match your GLSL version to your context hints (3.3 core -> "#version 330")
 
+    io.Fonts->AddFontDefaultVector();
+
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 330");
+
+
+    float value = 5.0f;
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -55,11 +61,22 @@ namespace MotionLab {
             std::cout << "hi" << std::endl;
         }
 
-        // ImGui::SliderFloat("bruh %d", 0, 1, *"%.3f", 0);
+
+        ImGui::ColorPicker4("Background Color", reinterpret_cast<float*>(&background), ImGuiColorEditFlags_NoSmallPreview |
+                        ImGuiColorEditFlags_NoTooltip |
+                        ImGuiColorEditFlags_NoLabel |
+                        ImGuiColorEditFlags_NoSidePreview |
+                        // ImGuiColorEditFlags_NoInputs |
+                        // ImGuiColorEditFlags_NoAlpha |
+                        ImGuiColorEditFlags_PickerHueBar);
+
+
+        ImGui::SliderFloat("Set value", &value, 0.0f, 10.0f);
 
         // Render
         ImGui::Render();
 
+        glfwSetWindowOpacity(window, 0.0f);
         glClearColor(background.red, background.green, background.blue, background.alpha);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -72,6 +89,7 @@ namespace MotionLab {
 }
 
 void Window::cleanUp() {
+    std::cout << "CleanUp" << std::endl;
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
@@ -81,6 +99,6 @@ void Window::cleanUp() {
 }
 
 Window::~Window() {
-    cleanUp();
+    // cleanUp();
 }
 }

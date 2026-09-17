@@ -10,9 +10,19 @@ set(IM_GUI_BACKENDS_SOURCES
         dependencies/ImGUI/backends/imgui_impl_opengl3.cpp
 )
 
+set(LINK_LIBS)
+
+if (MINGW) # Windows MinGW TODO: SUPPORT MSVC
+    list(APPEND LINK_LIBS opengl32 ${CMAKE_SOURCE_DIR}/dependencies/mingw-w64/GLFW/libglfw3.a)
+else () # Linux & Mac (not tested on MacOS, although it SHOULD work)
+    find_package(glfw3 3.5 REQUIRED)
+    find_package(OpenGL REQUIRED)
+    list(APPEND LINK_LIBS OpenGL::GL glfw)
+endif (MINGW)
+
 add_library(MotionLabEngine SHARED ${SOURCE} ${IM_GUI_SOURCE} ${IM_GUI_BACKENDS_SOURCES} dependencies/GLAD/src/glad.c)
 include_directories(include dependencies/GLFW/include dependencies/GLAD/include dependencies/ImGUI dependencies/ImGUI/backends)
-target_link_libraries(MotionLabEngine ${CMAKE_SOURCE_DIR}/dependencies/mingw-w64/GLFW/libglfw3.a) # TODO: use some sort of a variable to automatically get the correct compiler folder
+target_link_libraries(MotionLabEngine ${LINK_LIBS})  # TODO: use some sort of a variable to automatically get the correct compiler folder
 
 file(GLOB TEST_SOURCE test/src/*.cpp)
 
