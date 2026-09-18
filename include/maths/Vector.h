@@ -23,8 +23,21 @@ namespace MotionLab::Maths {
             static_assert(sizeof... (Args) == n, "MotionLab::Maths::Vector: Wrong number of arguments!");
         }
 
-        Vector<T, n> operator +(Vector<T, n>& operand); //todo
-        Vector<T, n> operator -(Vector<T, n>& operand); //todo
+        Vector<T, n> operator +(const Vector<T, n>& operand) {
+            Vector<T, n> result;
+            for (int i = 0; i < n; i++) {
+                result.axes[i] = this->axes[i] + operand->axes[i];
+            }
+            return result;
+        }
+
+        Vector<T, n> operator -(const Vector<T, n>& operand) {
+            Vector<T, n> result;
+            for (int i = 0; i < n; i++) {
+                result.axes[i] = this->axes[i] - operand->axes[i];
+            }
+            return result;
+        }
     };
 
     template<typename T>

@@ -15,7 +15,7 @@ namespace MotionLab {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
+    // glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
 
     window = glfwCreateWindow(size.x(), size.y(), "MotionLab2D", NULL, NULL);
 
@@ -76,9 +76,13 @@ namespace MotionLab {
         // Render
         ImGui::Render();
 
-        glfwSetWindowOpacity(window, 0.0f);
+        // glfwSetWindowOpacity(window, 0.0f); // breaks on windows and was pointless anyway so disabled
         glClearColor(background.red, background.green, background.blue, background.alpha);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        for (auto object : objects) {
+            object.render();
+        }
 
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

@@ -14,10 +14,15 @@ set(LINK_LIBS)
 
 if (MINGW) # Windows MinGW TODO: SUPPORT MSVC
     list(APPEND LINK_LIBS opengl32 ${CMAKE_SOURCE_DIR}/dependencies/mingw-w64/GLFW/libglfw3.a)
-else () # Linux & Mac (not tested on MacOS, although it SHOULD work)
-    find_package(glfw3 3.5 REQUIRED)
+else (MINGW) # Linux & Mac (not tested on MacOS, although it SHOULD work)
     find_package(OpenGL REQUIRED)
-    list(APPEND LINK_LIBS OpenGL::GL glfw)
+    list(APPEND LINK_LIBS OpenGL::GL)
+    if (APPLE)
+        list(APPEND LINK_LIBS ${CMAKE_SOURCE_DIR}/dependencies/macos/GLFW/libglfw3.a)
+    else (APPLE)
+        find_package(glfw3 3.5 REQUIRED)
+        list(APPEND LINK_LIBS glfw)
+    endif (APPLE)
 endif (MINGW)
 
 add_library(MotionLabEngine SHARED ${SOURCE} ${IM_GUI_SOURCE} ${IM_GUI_BACKENDS_SOURCES} dependencies/GLAD/src/glad.c)
